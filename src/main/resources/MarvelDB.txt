@@ -1,0 +1,30 @@
+#Criar conexão MySQL -- ConnectionName: marvel / user: root / password: root
+
+CREATE DATABASE marvel;
+USE marvel;
+
+#Rodar projeto para criar tabelas via hibernate
+
+INSERT INTO tb_character (id, name, description, modified, resourceuri) VALUES (1, 'Thanos', 'Titan', curdate(), 'https://thanos');
+INSERT INTO tb_character (id, name, description, modified, resourceuri) VALUES (2, 'Ironman', 'Iron', curdate(), 'https://iron');
+INSERT INTO tb_character (id, name, description, modified, resourceuri) VALUES (3, 'Thor', 'God', curdate(), 'https://thor');
+INSERT INTO tb_character (id, name, description, modified, resourceuri) VALUES (4, 'Teste', 'Test', curdate(), 'https://test');
+
+INSERT INTO tb_url (id, type, url, fk_personagem_id) VALUES (1, 'wiki', 'http://wikiThanos', 1);
+INSERT INTO tb_url (id, type, url, fk_personagem_id) VALUES (2, 'wiki', 'http://wikiIron', 2);
+INSERT INTO tb_url (id, type, url, fk_personagem_id) VALUES (3, 'doc', 'http://docThanos', 1);
+INSERT INTO tb_url (id, type, url, fk_personagem_id) VALUES (4, 'other', 'http://otherThanos', 1);
+
+#ALTER TABLE tb_url ADD foreign key (characterId) REFERENCES tb_character(id);
+#ALTER TABLE tb_character ADD urlId int;
+#UPDATE tb_url SET fk_personagem_id = 1 WHERE character_id = 1;
+#UPDATE tb_character SET modified = now() WHERE id = 4;
+
+SELECT * FROM tb_character;
+SELECT * FROM tb_url;
+
+SELECT * FROM tb_character INNER JOIN tb_url ON fk_personagem_id = tb_character.id AND fk_personagem_id = 1;
+SELECT * FROM TB_CHARACTER tc INNER JOIN tb_url tu;
+
+DROP TABLE tb_character;
+DROP TABLE tb_url;
